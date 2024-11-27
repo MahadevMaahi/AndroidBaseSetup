@@ -13,5 +13,11 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Application"
 include(":app")
+project(":app").projectDir = File(rootDir, "app")
+
+include(":primary")
+project(":primary").projectDir = File(rootDir, "source/primary")
+
+
+rootProject.name = "My Application"

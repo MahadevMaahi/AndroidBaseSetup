@@ -1,3 +1,4 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlin)
@@ -7,20 +8,19 @@ plugins {
 }
 
 android {
-    namespace = "com.sai.sample.myapplication"
+    namespace = "com.sai.sample.primary"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sai.sample.myapplication"
+        applicationId = "com.sai.sample.primary"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "PRIMARY_BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -39,21 +39,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation(project(":primary"))
+
+
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.activity.compose)
@@ -70,4 +64,13 @@ dependencies {
     //Dagger Hilt
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
+
+    // Retrofit
+    implementation(libs.squareup.retrofit2)
+    implementation (libs.squareup.okhttp)
+    implementation(libs.squareup.convertergson)
+    implementation(libs.squareup.adapterRxJava)
+
+    // ViewModel Compose
+    implementation(libs.androidx.viewmodel.lifecycle)
 }

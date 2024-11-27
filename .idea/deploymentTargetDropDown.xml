@@ -5,6 +5,12 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="primary">
+        <State />
+      </entry>
+      <entry key="primary-module">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
